@@ -1,0 +1,9 @@
+﻿https://learn.microsoft.com/en-us/dotnet/architecture/cloud-native/relational-vs-nosql-data
+
+
+RDBMS			Mongo	
+
+database		database
+table			collection
+row				document
+column			field

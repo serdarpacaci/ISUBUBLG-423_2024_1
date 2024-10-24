@@ -1,0 +1,6 @@
+@IsubuSatis.KatalogApi_HostAddress = http://localhost:5092
+
+GET {{IsubuSatis.KatalogApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
