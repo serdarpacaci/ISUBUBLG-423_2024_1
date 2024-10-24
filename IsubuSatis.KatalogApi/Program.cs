@@ -1,4 +1,7 @@
 
+using IsubuSatis.KatalogApi.Models;
+using IsubuSatis.KatalogApi.Services;
+
 namespace IsubuSatis.KatalogApi
 {
     public class Program
@@ -8,12 +11,18 @@ namespace IsubuSatis.KatalogApi
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddScoped<IKategoriService, KategoriService>();
+            builder.Services.AddScoped<IUrunService, UrunService>();
+
+            var mongoDbConfiguration = builder.Configuration.GetSection("MongoDbSettings");
+            builder.Services.Configure<MongoDbSettings>(mongoDbConfiguration);
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddAutoMapper(typeof(Program));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

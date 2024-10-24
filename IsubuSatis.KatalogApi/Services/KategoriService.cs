@@ -1,25 +1,26 @@
-﻿using IsubuSatis.KatalogApi.Dtos;
+﻿using AutoMapper;
+using IsubuSatis.KatalogApi.Dtos;
 using IsubuSatis.KatalogApi.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace IsubuSatis.KatalogApi.Services
 {
-    public class MongoDbTables
-    {
-        public static string KategoriTable = "kategori"; 
-    }
     public class KategoriService : IKategoriService
     {
         private readonly IMongoCollection<Kategori> _kategoriCollection;
         private readonly MongoDbSettings _mongoDbSettings;
+        private readonly IMapper _mapper;
 
-        public KategoriService(IOptions<MongoDbSettings> setting)
+        public KategoriService(IOptions<MongoDbSettings> setting,
+            IMapper mapper)
         {
             var client = new MongoClient(setting.Value.ConnectionUrl);
             var database = client.GetDatabase(setting.Value.Database);
             _kategoriCollection = database.GetCollection<Kategori>(MongoDbTables.KategoriTable);
-
+         
+            _mapper = mapper;
         }
         public async Task CreateOrUpdate(CreateOrUpdateKategoriDto input)
         {
@@ -36,22 +37,35 @@ namespace IsubuSatis.KatalogApi.Services
 
         private async Task Update(CreateOrUpdateKategoriDto input)
         {
-            throw new NotImplementedException();
+            var kategori = _kategoriCollection.AsQueryable()
+                .Where(x=> x.Id == input.Id)
+                .FirstOrDefault();
+
+            _mapper.Map(input, kategori);
+
+            await  _kategoriCollection.ReplaceOneAsync(
+                Builders<Kategori>.Filter.Eq(x => x.Id, input.Id), kategori);
         }
 
         private async Task Create(CreateOrUpdateKategoriDto input)
         {
-            _
+            var kategori = _mapper.Map<Kategori>(input);
+
+            await _kategoriCollection.InsertOneAsync(kategori);
         }
 
-        public Task<List<KategoriDto>> GetKategoriler()
+        public async Task<List<KategoriDto>> GetKategoriler()
         {
-            throw new NotImplementedException();
+            var kategoriler = await _kategoriCollection.AsQueryable()
+                .ToListAsync();
+           
+            return _mapper.Map<List<KategoriDto>>(kategoriler);
         }
 
-        public Task Sil(string id)
+        public async Task Sil(string id)
         {
-            throw new NotImplementedException();
+            await _kategoriCollection.DeleteOneAsync(
+                Builders<Kategori>.Filter.Eq(x => x.Id, id));
         }
     }
 }
