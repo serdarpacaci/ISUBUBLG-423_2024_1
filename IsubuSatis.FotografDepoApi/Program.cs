@@ -1,9 +1,7 @@
 
-using IsubuSatis.KatalogApi.Models;
-using IsubuSatis.KatalogApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
-namespace IsubuSatis.KatalogApi
+namespace IsubuSatis.FotografDepoApi
 {
     public class Program
     {
@@ -12,24 +10,17 @@ namespace IsubuSatis.KatalogApi
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddScoped<IKategoriService, KategoriService>();
-            builder.Services.AddScoped<IUrunService, UrunService>();
-
-            var mongoDbConfiguration = builder.Configuration.GetSection("MongoDbSettings");
-            builder.Services.Configure<MongoDbSettings>(mongoDbConfiguration);
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddAutoMapper(typeof(Program));
-
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(x =>
                 {
                     x.Authority = "https://localhost:5001";
-                    x.Audience = "resource_katalog";
+                    x.Audience = "resource_fotografDepo";
                     x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                     {
                         RequireExpirationTime = true,
@@ -37,6 +28,7 @@ namespace IsubuSatis.KatalogApi
                         ClockSkew = TimeSpan.FromSeconds(15)
                     };
                 });
+
 
             var app = builder.Build();
 
