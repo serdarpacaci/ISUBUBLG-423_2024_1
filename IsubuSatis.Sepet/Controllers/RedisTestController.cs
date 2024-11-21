@@ -23,9 +23,17 @@ namespace IsubuSatis.Sepet.Controllers
             var database = redisService.GetDatabase();
 
             var dersler = await database.StringGetAsync("dersler");
-            var result =  JsonSerializer.Deserialize<List<Ders>>(dersler);
+            if (dersler.HasValue)
+            {
+                var result = JsonSerializer.Deserialize<List<Ders>>(dersler);
+                return Ok(result);  
+            }
 
-            return Ok(result);
+            var dbDersler = await GetDersler();
+            var dbDerslerJson = JsonSerializer.Serialize(dbDersler);
+            await database.StringSetAsync("dersler", dbDerslerJson);
+
+            return Ok(dbDersler);
         }
 
         private async Task<List<Ders>> GetDersler()

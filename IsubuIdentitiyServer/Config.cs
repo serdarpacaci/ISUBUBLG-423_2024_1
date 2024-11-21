@@ -19,6 +19,10 @@ namespace IsubuIdentitiyServer
                 new ApiResource("resource_fotografDepo")
                 {
                     Scopes ={ "fotograf" }
+                },
+                new ApiResource("resource_sepet")
+                {
+                    Scopes = {"sepet"}
                 }
             };
 
@@ -35,7 +39,8 @@ namespace IsubuIdentitiyServer
                 new ApiScope("scope1"),
                 new ApiScope("scope2"),
                 new ApiScope("katalog"),
-                new ApiScope("fotograf")
+                new ApiScope("fotograf"),
+                new ApiScope("sepet")
 
             };
 
@@ -51,7 +56,7 @@ namespace IsubuIdentitiyServer
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     ClientSecrets = { new Secret("ISUBU_Secret".Sha256()) },
 
-                    AllowedScopes = { "scope1", "katalog" }
+                    AllowedScopes = { "scope1", "katalog"}
                 },
 
                 // interactive client using code flow + pkce
@@ -59,11 +64,11 @@ namespace IsubuIdentitiyServer
                 {
                     ClientId = "IsubuSatisMvcForUser",
                     ClientSecrets = { new Secret("ISUBUUser_Secret".Sha256()) },
-                    AllowedScopes = { "openid", "profile", "katalog", "fotograf" },
+                    AllowedScopes = { "openid", "profile", "katalog", "fotograf", "sepet" },
 
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     AllowOfflineAccess = true,
-                    AccessTokenLifetime = 30
+                    AccessTokenLifetime = 300000
                     //RedirectUris = { "https://localhost:44300/signin-oidc" },
                     //FrontChannelLogoutUri = "https://localhost:44300/signout-oidc",
                     //PostLogoutRedirectUris = { "https://localhost:44300/signout-callback-oidc" },
