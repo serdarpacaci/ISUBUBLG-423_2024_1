@@ -1,0 +1,6 @@
+@IsubuSatis.OdemeApi_HostAddress = http://localhost:5133
+
+GET {{IsubuSatis.OdemeApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
