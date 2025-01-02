@@ -28,6 +28,7 @@ namespace IsubuSatis.OdemeApi
 				});
 			});
 
+
 			var app = builder.Build();
 
 			// Configure the HTTP request pipeline.

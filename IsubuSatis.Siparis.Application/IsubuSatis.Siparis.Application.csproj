@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.3.4" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IsubuSatis.Shared\IsubuSatis.Shared.csproj" />
+    <ProjectReference Include="..\IsubuSatis.Siparis.Domain\IsubuSatis.Siparis.Domain.csproj" />
+    <ProjectReference Include="..\IsubuSatis.Siparis.Persistence\IsubuSatis.Siparis.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

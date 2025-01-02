@@ -1,0 +1,126 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7048
+        }
+      ],
+      "UpstreamPathTemplate": "/services/katalog/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "UpstreamScheme": "https"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7255
+        }
+      ],
+      "UpstreamPathTemplate": "/services/fotografDepo/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "UpstreamScheme": "https"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7292
+        }
+      ],
+      "UpstreamPathTemplate": "/services/sepet/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "UpstreamScheme": "https"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7014
+        }
+      ],
+      "UpstreamPathTemplate": "/services/indirim/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "UpstreamScheme": "https"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7015
+        }
+      ],
+      "UpstreamPathTemplate": "/services/siparis/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "UpstreamScheme": "https"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "katalog",
+      "TransformByOcelotConfig": false,
+      "Config": [
+        {
+          "Name": "Katolog Web API",
+          "Version": "v1",
+          "Url": "https://localhost:7048/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "fotografDepo",
+      "TransformByOcelotConfig": false,
+      "Config": [
+        {
+          "Name": "Fotograf Depo Web API",
+          "Version": "v1",
+          "Url": "https://localhost:7255/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "sepet",
+      "TransformByOcelotConfig": false,
+      "Config": [
+        {
+          "Name": "Sepet Web API",
+          "Version": "v1",
+          "Url": "https://localhost:7292/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "indirim",
+      "TransformByOcelotConfig": false,
+      "Config": [
+        {
+          "Name": "Indirim Web API",
+          "Version": "v1",
+          "Url": "https://localhost:7014/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "siparis",
+      "TransformByOcelotConfig": false,
+      "Config": [
+        {
+          "Name": "Siparis Web API",
+          "Version": "v1",
+          "Url": "https://localhost:7015/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}
